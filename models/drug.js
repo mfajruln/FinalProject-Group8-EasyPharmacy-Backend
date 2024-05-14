@@ -51,7 +51,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    packaging: DataTypes.STRING 
+    packaging: DataTypes.STRING,
+    isActive: {
+      type : DataTypes.STRING,
+      defaultValue: 'active',
+    }
   }, {
     sequelize,
     modelName: 'Drug',

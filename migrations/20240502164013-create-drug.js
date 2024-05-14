@@ -36,6 +36,10 @@ module.exports = {
         allowNull: false
       },
       packaging: DataTypes.STRING,
+      isActive: {
+        type: DataTypes.STRING,
+        defaultValue: 'active',
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

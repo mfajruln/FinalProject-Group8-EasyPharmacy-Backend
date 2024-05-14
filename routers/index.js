@@ -14,6 +14,7 @@ router.post('/user/login', AuthenticationController.Login);
 router.use(authentication);
 
 router.use(userField);
+router.get('/drug/datalength', DrugController.getLenghtData);
 router.get('/drug/list', DrugController.getAllDrugs);
 router.get('/drug/detail/:id', DrugController.drugDetail);
 
