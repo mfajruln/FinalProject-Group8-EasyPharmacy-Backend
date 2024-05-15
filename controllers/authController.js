@@ -18,8 +18,6 @@ class AuthenticationController {
                     },
                 });
 
-            
-            // console.log(data==true);
             if (data.length > 0) {
                 // jika data ada, maka data yang diinput sudah ada pada database
                 // syntax throw dibawah akan melempar object ke parameter error yang ada pada fungsi catch
@@ -37,16 +35,12 @@ class AuthenticationController {
                 phoneNumber,
                 roleUser: 'user'
             });
-            /**
-             * ! perbaiki field create-nya, req.body is not a best practice!
-             */
             
             res.status(201).json({
                 message: "Successful Regist!"
             })
 
         } catch (error){
-            console.error(error);
             res.status(error.status).json({
                 //untuk error yang terjadi karena email atau phone number already exist, gunakan response code 400 (bad request)
                 message: error.errMessage
@@ -55,11 +49,9 @@ class AuthenticationController {
     }
 
     static async Login(req, res) {
-        // console.log(req.body);
 
         try {
             const { email, password } = req.body
-            console.log(req.body);
 
             const data = await User.findOne({
                 where: {
@@ -78,7 +70,6 @@ class AuthenticationController {
             }
 
             const checkPass = comparePassword(password, data.password)
-            console.log(password);
 
             if (!checkPass) {
                 throw {
@@ -95,53 +86,14 @@ class AuthenticationController {
             
             const token = generateToken(payload)
 
-            // console.log(token);
-
             return res.status(200).json({ token })
-        } catch (error){
-            console.error(error);
+        } catch (error) {
 
             res.status(error.status).json({
                 message: error.errMessage
             });
             // ikutin cara ini
         }
-        // User.findOne({
-        //     where: {
-        //         email
-        //     }
-        // })
-        //     .then(user => {
-        //         if (!user) {
-        //             throw {
-        //                 name: "User Login Error",
-        //                 devMessage: `User with email ${email} not found`
-        //             }
-        //         }
-        //         const isCorrect = comparePassword(password, user.password)
-        //         if (!isCorrect) {
-        //             throw {
-        //                 name: "User Login Error",
-        //                 devMessage: `User's password with email ${email} does not match`
-        //             }
-        //         }
-                // let payload = {
-                //     id: data.id,
-                //     fullname: data.fullname,
-                // }
-
-        //         const token = generateToken(payload)
-
-        //         return res.status(200).json({ token })
-        //     })
-        //     .catch(err => {
-        //         console.error(err);
-        //         if (err.name === 'User Login Error') {
-        //             res.status(401).json({ message: err.devMessage });
-        //         } else {
-        //             res.status(500).json({ message: err.message });
-        //         }
-        //     })
     }
 }
 

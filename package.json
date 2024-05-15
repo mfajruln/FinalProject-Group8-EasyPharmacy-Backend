@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js",
-    "commit": "cz"
+    "commit": "cz",
+    "seeding": "npx sequelize-cli db:seed:all"
   },
   "author": "",
   "license": "ISC",

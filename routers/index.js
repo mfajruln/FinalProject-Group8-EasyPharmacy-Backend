@@ -18,7 +18,7 @@ router.get('/drug/datalength', DrugController.getLenghtData);
 router.get('/drug/list', DrugController.getAllDrugs);
 router.get('/drug/detail/:id', DrugController.drugDetail);
 
-router.get('/drug/list', CartController.getAllCartItems);
-router.get('/drug/list', CartController.addToCart);
+router.get('/cart/list', CartController.getAllCartItems);
+router.get('/cart/add', CartController.addToCart);
 
 module.exports = router;

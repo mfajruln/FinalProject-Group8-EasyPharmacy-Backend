@@ -12,11 +12,11 @@ class DrugController {
         });
 
         let lenghtData = data.length;
-
+        
         res.status(200).json({ lenghtData });
     }
     
-    static async getAllDrugs(req, res) {
+    static async getAllDrugs(req, res, next) {
 
         const { page } = req.query;
         const paramQuerySQL = {};
@@ -25,15 +25,15 @@ class DrugController {
 
         // pagination
         if (page !== '' && typeof page !== 'undefined') {
-        if (page.size !== '' && typeof page.size !== 'undefined') {
-            limit = page.size;
-            paramQuerySQL.limit = limit;
-        }
+            if (page.size !== '' && typeof page.size !== 'undefined') {
+                limit = page.size;
+                paramQuerySQL.limit = limit;
+            }
 
-        if (page.number !== '' && typeof page.number !== 'undefined') {
-            offset = page.number * limit - limit;
-            paramQuerySQL.offset = offset;
-        }
+            if (page.number !== '' && typeof page.number !== 'undefined') {
+                offset = page.number * limit - limit;
+                paramQuerySQL.offset = offset;
+            }
         } else {
             limit = 5; // limit 5 item
             offset = 0;
@@ -43,11 +43,12 @@ class DrugController {
 
         try {
             const data = await Drug.findAll(paramQuerySQL);
+            // console.log(data);
             if (data) {
                 res.status(200).json({ data });
             }
-        } catch (err) {
-            next(err);
+        } catch (error) {
+            next(error);
         }
 
     }
@@ -68,15 +69,14 @@ class DrugController {
                 res.status(200).json({ data })
             } else if(!data) {
                 throw {
-                    name: "404",
+                    status: 404,
                     errMessage: "Drug not found."
                 }
             }
         } catch(error) {
-            res.status(404).json({
-                //untuk error email user tidak ditemukan, gunakan response code 404 (Not Found)
+            res.status(error.status).json({
                 message: error.errMessage
-            })
+            });
         }
     }
 }
