@@ -14,11 +14,19 @@ module.exports = {
       },
       userId: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+          model: 'Users',
+          key: 'id'
+        }
       },
       drugId: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+          model: 'Drugs',
+          key: 'id'
+        }
       },
       quantity: {
         type: DataTypes.INTEGER,

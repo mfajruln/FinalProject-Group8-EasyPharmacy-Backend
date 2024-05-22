@@ -86,7 +86,13 @@ class AuthenticationController {
             
             const token = generateToken(payload)
 
-            return res.status(200).json({ token })
+            const userData = {
+                id: data.id,
+                email: data.email,
+                fullName: data.fullName
+            }
+
+            return res.status(200).json({ token, userData })
         } catch (error) {
 
             res.status(error.status).json({
