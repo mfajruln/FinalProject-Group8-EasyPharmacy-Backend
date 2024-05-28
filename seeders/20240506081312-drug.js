@@ -14,6 +14,7 @@ module.exports = {
     */
     await queryInterface.bulkInsert('Drugs', [
       {
+        image: 'https://d2qjkwm11akmwu.cloudfront.net/products/782475_23-3-2020_14-28-1-1665778689.jpeg',
         name: 'Paracetamol',
         description: 'Obat penurun demam dan pereda nyeri',
         dose: '500mg',
@@ -27,6 +28,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        image: 'https://d1vbn70lmn1nqe.cloudfront.net/prod/wp-content/uploads/2023/05/13090017/amoxilin.jpg',
         name: 'Amoxicillin',
         description: 'Antibiotik untuk mengobati infeksi bakteri, seperti infeksi saluran pernapasan, kulit, dan infeksi THT.',
         dose: '500mg',
@@ -40,6 +42,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        image: 'https://kalbemed.com/storage/images/products/ec5f39e7f0c80b20c0bf1e614e968acf.jpg',
         name: 'Cetirizine',
         description: 'Obat antihistamin untuk meredakan gejala alergi, seperti pilek, bersin, mata gatal, dan ruam kulit.',
         dose: '10mg',
@@ -53,6 +56,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        image: 'https://d3bbrrd0qs69m4.cloudfront.net/images/product/large/apotek_online_k24klik_20200905113048359225_TREMENZA.jpg',
         name: 'Tremenza',
         description: 'Obat Tremenza adalah obat yang digunakan untuk meringankan gelaja flu seperti hidung tersumbat dan bersin-bersin yang disebabkan oleh alergi pada saluran pernapasan atas.',
         dose: '60mg',
@@ -66,6 +70,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        image: 'https://d3bbrrd0qs69m4.cloudfront.net/images/product/large/apotek_online_k24klik_20210802083708359225_IMG-20210730-180652--2---2-.jpg',
         name: 'Methylprednisolon',
         description: 'Obat Methylprednisolon merupakan glukokortikoid turunan prednisolon yang mempunyai efek kerja dan penggunaan yang sama seperti prednison.',
         dose: '4mg',
@@ -79,6 +84,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        image: 'https://res.cloudinary.com/dk0z4ums3/image/upload/v1692150696/attached_image/rhinos-sr.jpg',
         name: 'Rhinos SR',
         description: 'Obat Rhinos SR merupakan obat yang digunakan untuk meringankan gejala rinitis alergi, bersin-bersin, hidung tersumbat, dan rasa gatal pada hidup.',
         dose: '60mg',
@@ -92,6 +98,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        image: 'https://d3bbrrd0qs69m4.cloudfront.net/images/product/large/apotek_online_k24klik_20201014014316359225_parastutin-60-ml.jpg',
         name: 'Paratusin',
         description: 'Obat Paratusin adalah obat untuk meringankan gejala flu seperti demam, sakit kepala, hidung tersumbat dan bersin-bersin yang disertain batuk.',
         dose: '600mg',
@@ -105,6 +112,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        image: 'https://s3-publishing-cmn-svc-prd.s3.ap-southeast-1.amazonaws.com/drugs/6kxPJOpj9Qk3lTBnzzjxR/original/OBT0009495.jpg',
         name: 'Omeprazole',
         description: 'Obat Paratusin adalah obat untuk meringankan gejala flu seperti demam, sakit kepala, hidung tersumbat dan bersin-bersin yang disertain batuk.',
         dose: '600mg',
@@ -118,6 +126,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        image: 'https://images.tokopedia.net/img/cache/700/OJWluG/2022/8/12/c988149a-7aa3-45b1-9c49-1022c97e2677.png',
         name: 'Cefadroxil Hexpharm',
         description: 'Obat Paratusin adalah obat untuk meringankan gejala flu seperti demam, sakit kepala, hidung tersumbat dan bersin-bersin yang disertain batuk.',
         dose: '500mg',
@@ -131,6 +140,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        image: 'https://d2qjkwm11akmwu.cloudfront.net/products/125365_23-5-2022_13-26-54-1.jpeg',
         name: 'Polysilane',
         description: 'Obat Paratusin dapat digunakan untuk mengurangi gejala yang berhubungan dengan kelebihan asam lambung, gastritis, tukak lambung, tukak usus 12 jari dengan gajala seperti mual, nyeri ulu hati, nyeri lambung, kembung, dan perasaan penuh pada lambung.',
         dose: '500mg',
@@ -144,6 +154,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        image: 'https://d3bbrrd0qs69m4.cloudfront.net/images/product/large/apotek_online_k24klik_20210729034157359225_AZITHROMYCIN-KMKES-HEXPHARM-500MG-FC-CAPL-6S.jpg',
         name: 'Azithromycin Hexpharm',
         description: 'Obat Azithromycin Hexpharm merupakan antibiotik golongan makrolida yang mempunyai spektrum luas, aktif terhadap bakteri gram negatif maupun gram positif.',
         dose: '500mg',
@@ -157,6 +168,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        image: 'https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//103/MTA-32165797/sanbe-farma_tuzalos-strip_full01.jpg',
         name: 'Tuzalos',
         description: 'Obat Tuzalos dapat digunakan untuk mengatasi gejala flu, batuk, demam, pilek karena alergi.',
         dose: '500mg',
@@ -170,6 +182,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        image: 'https://images.tokopedia.net/img/cache/700/OJWluG/2022/3/16/afbb6e69-8356-40dc-92c7-2ecec0418481.jpg',
         name: 'Sanadryl',
         description: 'Obat Sanadryl merupakan kombinasi dari dextromethorphan HBr, Difenhidramin HCl, Amonium Klorida 100mg dan Natrium Sitrat.',
         dose: '120ml',
@@ -183,6 +196,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        image: 'https://img-cdn.medkomtek.com/RQQFLxKJVPr6p86NyiJsg972CNw=/510x395/smart/filters:quality(100):format(webp)/drugs/hHOd529y8FfZPTV1F6DqQ/original/OBT0008473.jpg',
         name: 'Loratadine',
         description: 'Obat Sanadryl adalah obat yang berfungsi untuk mengatasi gejala rhinitis alergi, diberikan dalam dosis tunggal.',
         dose: '10mg',
@@ -196,6 +210,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        image: 'https://kalbemed.com/storage/images/products/0587c152cebb0095b55fa34a217d4fd4.jpg',
         name: 'Ciprofloxacin',
         description: 'Obat Ciprofloxacin merupakan antibiotik spektrum luas terhadap bakteri gram positif maupun gram negatif.',
         dose: '500mg',
@@ -209,6 +224,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        image: 'https://d3bbrrd0qs69m4.cloudfront.net/images/product/large/apotek_online_k24klik_20211130110706359225_CEFIXIME-BERNOFARM-100MG-5ML-D-SYR-30ML.jpg',
         name: 'Cefixime',
         description: 'Obat Ciprofloxacin merupakan obat antibiotik berbentuk kapsul golongan sefalosporin.',
         dose: '100mg',
@@ -222,6 +238,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        image: 'https://assets.klikindomaret.com/share/10006565_1.jpg',
         name: 'Tempra',
         description: 'Obat Tempra sirup pereda demam dan penghilang nyeri ringan.',
         dose: '30ml',
@@ -235,6 +252,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        image: 'https://storage.googleapis.com/rxstorage/Product/large/Apotek_Online_Farmaku_com_Miconazole_Cream_2%_(Kf).jpg',
         name: 'Miconazole',
         description: 'Obat Miconazole krim anti jamur.',
         dose: '10g',
@@ -248,6 +266,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        image: 'https://d3bbrrd0qs69m4.cloudfront.net/images/product/large/apotek_online_k24klik_2022080310451423085_98ef29bc-a3bb-4022-8b5b-75f93f5d7c10.jpg',
         name: 'Tempra',
         description: 'Obat Tempra sirup pereda demam dan penghilang nyeri ringan.',
         dose: '30ml',
@@ -261,6 +280,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        image: 'https://d3bbrrd0qs69m4.cloudfront.net/images/product/large/apotek_online_k24klik_20201015021532359225_SANEXON-16.jpg',
         name: 'Sanexon',
         description: 'Obat Sanexon merupakan obat dengan kandungan bahan aktif metilprednisolon.',
         dose: '4mg',
@@ -274,6 +294,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        image: 'https://images.tokopedia.net/img/cache/700/VqbcmM/2022/3/23/0ebc135c-a81d-4bee-bae5-8932120effa2.jpg',
         name: 'Sterimal Nasal Spray',
         description: 'Obat Sterimal Nasal Spray merukapan obat semprot hidung yang digunakan untuk melembabkan membran nasal(hidung) yang kering dan meradang karena pilek, alergi, kelembaban yang rendah dan iritasi hidung yang lainnya.',
         dose: '50ml',
