@@ -14,7 +14,9 @@ module.exports = (sequelize, DataTypes) => {
       Drug.hasMany(models.Cart, {
         foreignKey: 'drugId'
       });
-      Drug.hasMany(models.OrderDetail);
+      Drug.hasMany(models.OrderDetail, {
+        foreignKey: 'drugId'
+      });
       // Drug.belongsTo(models.Dose);
       // Drug.belongsTo(models.DrugClass);
       // Drug.belongsTo(models.DrugFactory);

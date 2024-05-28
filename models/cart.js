@@ -39,6 +39,9 @@ module.exports = (sequelize, DataTypes) => {
     quantity: {
       type: DataTypes.INTEGER,
       allowNull: false,
+    },
+    deletedAt: {
+      type: DataTypes.DATE,
     }
   }, {
     sequelize,

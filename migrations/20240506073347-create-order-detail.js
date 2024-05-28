@@ -11,11 +11,19 @@ module.exports = {
       },
       orderId: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+          model: 'Orders',
+          key: 'id'
+        }
       },
       drugId: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+          model: 'Drugs',
+          key: 'id'
+        }
       },
       quantity: {
         type: Sequelize.INTEGER,

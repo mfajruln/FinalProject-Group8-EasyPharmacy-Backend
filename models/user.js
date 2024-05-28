@@ -15,7 +15,9 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.Cart, {
         foreignKey: 'userId'
       });
-      User.hasMany(models.Order);
+      User.hasMany(models.Order, {
+        foreignKey: 'userId'
+      });
 
       // Foo.hasOne(models.Order);
       // User.belongsTo(models.Cart);
