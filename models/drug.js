@@ -32,6 +32,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Drug.init({
+    image: DataTypes.STRING,
     name: {
       type: DataTypes.STRING,
       allowNull: false

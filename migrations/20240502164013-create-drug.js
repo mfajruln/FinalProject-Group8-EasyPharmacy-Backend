@@ -12,6 +12,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      image:DataTypes.STRING,
       name: {
         type: Sequelize.STRING,
         allowNull: false
