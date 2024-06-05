@@ -3,6 +3,7 @@ const { Cart, Drug, Order, OrderDetail } = require('../models');
 const { Op } = require('sequelize');
 
 class OrderController {
+
     static async getAllOrders(req, res) {
 
         const { userId } = req.body
@@ -38,20 +39,159 @@ class OrderController {
         }
     }
 
+    static async uppaidOrderList(req, res) {
+
+        try {
+
+            const userId = +req.params.id
+
+            if (!userId || userId < 1 || !Number.isInteger(userId)) {
+
+                throw {
+                    status: 400,
+                    errMessage: "Bad Request"
+                }
+            }
+
+            const data = await Order.findAll({
+
+                where:{
+                    [Op.and]: [{ userId }, { paidStatus: "Belum Bayar" }]
+                    // userId: userId
+                }
+            });
+
+            if (data.length > 0) {
+
+                res.status(200).json(data);
+            } else if (!data.length) {
+
+                throw {
+
+                    status: 404,
+                    errMessage: "Not Found"
+                }
+            }
+            
+        } catch (error) {
+
+            console.log(error);
+            res.status(error.status).json({
+
+                message: error.errMessage
+            })
+        }
+    }
+
+    static async paidOrderList(req, res) {
+
+        try {
+
+            const userId = +req.params.id
+            
+            if (!userId || userId < 1 || !Number.isInteger(userId)) {
+
+                throw {
+
+                    status: 400,
+                    errMessage: "Bad Request"
+                }
+            }
+
+            const data = await Order.findAll({
+
+                where:{
+
+                    [Op.and]: [{ userId: userId }, { paidStatus: "Selesai" }]
+                    // userId: userId
+                }
+            });
+
+            if (data.length > 0) {
+
+                res.status(200).json(data);
+            } else if (!data.length) {
+
+                throw {
+
+                    status: 404,
+                    errMessage: "Not Found"
+                }
+            }
+        } catch (error) {
+
+            console.log(error);
+            res.status(error.status).json({
+
+                message: error.errMessage
+            })
+        }
+    }
+
+    static async cancelOrderList(req, res) {
+
+        try {
+
+            const userId = +req.params.id
+            
+            if (!userId || userId < 1 || !Number.isInteger(userId)) {
+
+                throw {
+
+                    status: 400,
+                    errMessage: "Bad Request"
+                }
+            }
+
+            const data = await Order.findAll({
+
+                where:{
+
+                    [Op.and]: [{ userId: userId }, { paidStatus: "Batal" }]
+                    // userId: userId
+                }
+            });
+
+            if (data.length > 0) {
+
+                res.status(200).json(data);
+            } else if (!data.length) {
+
+                throw {
+
+                    status: 404,
+                    errMessage: "Not Found"
+                }
+            }
+        } catch (error) {
+
+            console.log(error);
+            res.status(error.status).json({
+
+                message: error.errMessage
+            })
+        }
+    }
+
     static async placedOrder(req, res) {
 
         try {
+
             const { userId } = req.body
 
             if (!userId || userId < 1 || !Number.isInteger(userId)) {
+
                 throw {
+
                     status: 400,
                     errMessage: "Bad Request."
                 }
             }
 
             const data = await Cart.findAll({
+
                 where:{
+
                     // userId: userId
                     [Op.and]: [{ userId: userId }, { deletedAt: null }]
                 }
@@ -60,6 +200,7 @@ class OrderController {
             if (data.length > 0) {
 
                 const dataOrder = await Order.create({
+
                     userId,
                     paidStatus: "Belum Bayar"
                 })
@@ -67,6 +208,7 @@ class OrderController {
                 const orderId = dataOrder.id
 
                 const payload = data.map(item => {
+
                     return {
                         orderId,
                         drugId: item.drugId,
@@ -80,6 +222,7 @@ class OrderController {
                     },
                     {
                         where:{
+
                             [Op.and]: [{ userId: userId }, { deletedAt: null }]
                         },
                     },
@@ -87,17 +230,29 @@ class OrderController {
 
                 const orderDetailItems = await OrderDetail.bulkCreate(payload);
 
-                res.status(200).json(orderDetailItems);
+                res.status(200).json({
+
+                    message: "Berhasil Menambahkan Item ke Order"
+                });
             } else if (!data.length) {
+
                 throw {
+
                     status: 404,
                     errMessage: "Not Found."
+                }
+            } else {
+                throw {
+                    status: 500,
+                    errMessage: "Internal Server Error"
                 }
             }
 
         } catch(error) {
+
             console.log(error);
             res.status(error.status).json({
+
                 message: error.errMessage
             })   
         }
@@ -107,35 +262,231 @@ class OrderController {
     static async updateQuantity(req, res) {
 
         try {
-            const { id, quantity } = req.body
+
+            const { orderDetailId, orderId, userId, quantity } = req.body
     
-            if (!id || !quantity
-                || id < 1 || quantity < 1
-                || !Number.isInteger(id) || !Number.isInteger(quantity)) {
+            if (!orderId || !userId || !orderDetailId || !quantity
+                || orderId < 1 || userId < 1 || orderDetailId < 1 || quantity < 1
+                || !Number.isInteger(orderId) || !Number.isInteger(userId) || !Number.isInteger(orderDetailId) || !Number.isInteger(quantity)) {
+
                 throw {
+
                     status: 400,
-                    errMessage: "Bad Request."
+                    errMessage: "Bad Request"
                 }
             }
     
-            const data = await Cart.findOne({
+            const dataOrder = await Order.findOne({
+
                 where: {
-                    id: id
+
+                    // id: id
+                    [Op.and]: [
+                        { id: orderId }, { userId }, {paidStatus: "Belum Bayar"}
+                    ]
                 }
             });
+
+            if (!dataOrder) {
+
+                throw {
+
+                    status: 404,
+                    errMessage: "Invalid Order"
+                }
+            } else if (dataOrder) {
+
+                const dataDetailOrder = await OrderDetail.findOne({
+
+                    where: {
+
+                        // id: id
+                        [Op.and]: [
+                            { id: orderDetailId }, {orderId: dataOrder.id}
+                        ]
+                    }
+                });
+
+                if (!dataDetailOrder) {
+
+                    throw {
+
+                        status: 404,
+                        errMessage: "Invalid Order Item"
+                    }
+                } else if (dataDetailOrder) {
+
+                    dataDetailOrder.quantity = quantity
+                    await dataDetailOrder.save();
+            
+                    res.status(200).json({
+
+                        message: "Update Quantity Order Item Berhasil"
+                    })
+                } else {
+
+                    throw {
+
+                        status: 500,
+                        errMessage: "Internal Server Error"
+                    }
+                }
+            } else {
+
+                throw {
+
+                    status: 500,
+                    errMessage: "Internal Server Error"
+                }
+            }
+        } catch(error) {
+
+            console.log(error);
+            res.status(error.status).json({
+
+                message: error.errMessage
+            })
+        }
+        
+    }
+
+    static async detailOrder(req, res) {
+        
+        try {
+
+            const { orderId, userId } = req.body
+
+            if (!orderId || !userId ||
+                orderId < 1 || userId < 1 ||
+                !Number.isInteger(orderId) || !Number.isInteger(userId)) {
+
+                throw {
+
+                    status: 400,
+                    errMessage: "Bad Request"
+                }
+            }
+
+            const dataOrder = await Order.findOne({
+                
+                where: {
+
+                    [Op.and]: [
+                        { id: orderId }, { userId }
+                    ]
+                }
+            })
+
+            if (!dataOrder) {
+
+                throw {
+
+                    status: 404,
+                    errMessage: "Invalid Order"
+                }
+            } else if(dataOrder) {
+
+                const dataDetailOrder = await OrderDetail.findAll({
+
+                    where: {
+                        orderId
+                    },
+                    include: [
+                        {
+                            model: Drug,
+                            attributes: [
+                                "name",
+                                "price"
+                            ]
+                        }
+                    ]
+                })
+    
+                if (dataDetailOrder.length > 0) {
+
+                    res.status(200).json(dataDetailOrder);
+                } else if (!dataDetailOrder.length) {
+
+                    throw {
+
+                        status: 404,
+                        errMessage: "Not Found"
+                    }
+                } else {
+
+                    throw {
+
+                        status: 500,
+                        errMessage: "Internal Server Error"
+                    }
+                }
+            } else {
+
+                throw {
+
+                    status: 500,
+                    errMessage: "Internal Server Error"
+                }
+            }
+    
+            
+        } catch (error) {
+
+            console.log(error);
+            res.status(error.status).json({
+                
+                message: error.errMessage
+            })
+        }
+
+    }
+
+    static async paidOrder(req, res) {
+
+        try {
+            
+            const { orderId, userId } = req.body
+
+            if (!orderId || !userId
+                || orderId < 1 || userId < 1
+                || !Number.isInteger(orderId) || !Number.isInteger(userId)) {
+                throw {
+                    status: 400,
+                    errMessage: "Bad Request"
+                }
+            }
+    
+            const data = await Order.findOne({
+                where: {
+                    [Op.and]: [
+                        { id: orderId }, { userId }, {paidStatus: "Belum Bayar"}
+                    ]
+                }
+            })
 
             if (!data) {
                 throw {
                     status: 404,
                     errMessage: "Not Found."
                 }
+            } else if (data) {
+                // data.paidStatus = "Batal"
+                // await data.save();
+        
+                // res.status(200).json({
+                //     message: "Order Berhasil di Batalkan"
+                // })
+
+
+            } else {
+                throw {
+                    status: 500,
+                    errMessage: "Internal Server Error"
+                }
             }
-    
-            data.quantity = quantity
-            await data.save();
-    
-            res.status(200).json(data)
-        } catch(error) {
+
+
+        } catch (error) {
             console.log(error);
             res.status(error.status).json({
                 message: error.errMessage
@@ -143,45 +494,46 @@ class OrderController {
         }
         
     }
-
-    static async historyOrder(req, res) {
-        console.log("masuk ke history order");
-    }
-
-    static async detailOrder(req, res) {
+    
+    static async cancelOrder(req, res) {
         
         try {
+            
+            const { orderId, userId } = req.body
 
-            const orderId = +req.params.id
-
-            if (!orderId || orderId < 1 || !Number.isInteger(orderId)) {
+            if (!orderId || !userId
+                || orderId < 1 || userId < 1
+                || !Number.isInteger(orderId) || !Number.isInteger(userId)) {
                 throw {
                     status: 400,
-                    errMessage: "Bad Request."
+                    errMessage: "Bad Request"
                 }
             }
     
-            const data = await OrderDetail.findAll({
+            const data = await Order.findOne({
                 where: {
-                    orderId: orderId
-                },
-                include: [
-                    {
-                        model: Drug,
-                        attributes: [
-                            "name",
-                            "price"
-                        ]
-                    }
-                ]
+                    [Op.and]: [
+                        { id: orderId }, { userId }, {paidStatus: "Belum Bayar"}
+                    ]
+                }
             })
 
-            if (data.length > 0) {
-                res.status(200).json(data);
-            } else if (!data.length) {
+            if (!data) {
                 throw {
                     status: 404,
                     errMessage: "Not Found."
+                }
+            } else if (data) {
+                data.paidStatus = "Batal"
+                await data.save();
+        
+                res.status(200).json({
+                    message: "Order Berhasil di Batalkan"
+                })
+            } else {
+                throw {
+                    status: 500,
+                    errMessage: "Internal Server Error"
                 }
             }
         } catch (error) {
@@ -190,12 +542,6 @@ class OrderController {
                 message: error.errMessage
             })
         }
-
-    }
-
-    static async cancelOrder(req, res) {
-        console.log("coba cancel order");
-
         
     }
 }

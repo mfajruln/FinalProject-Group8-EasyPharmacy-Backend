@@ -3,24 +3,24 @@ const { Cart, Drug } = require('../models');
 const { Op } = require('sequelize');
 
 class CartController {
+
     static async getAllCartItems(req, res) {
 
-        const { userId } = req.body
-
-        console.log(userId);
-
         try {
+
+            const userId = +req.params.id
+
             if (!userId || userId < 1 || !Number.isInteger(userId)) {
                 throw {
                     status: 400,
-                    errMessage: "Bad Request."
+                    errMessage: "Bad Request"
                 }
             }
 
             const data = await Cart.findAll({
                 where:{
                     // userId: userId
-                    [Op.and]: [{ userId: userId }, { deletedAt: null }]
+                    [Op.and]: [{ userId }, { deletedAt: null }]
                 },
                 include: [
                     {
@@ -38,7 +38,7 @@ class CartController {
             } else if (!data.length) {
                 throw {
                     status: 404,
-                    errMessage: "Not Found."
+                    errMessage: "Not Found"
                 }
             }
 
