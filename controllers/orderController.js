@@ -395,6 +395,7 @@ class OrderController {
                         {
                             model: Drug,
                             attributes: [
+                                "image",
                                 "name",
                                 "price"
                             ]

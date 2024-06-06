@@ -26,6 +26,7 @@ class CartController {
                     {
                         model: Drug,
                         attributes: [
+                            "image",
                             "name",
                             "price"
                         ]
@@ -127,7 +128,17 @@ class CartController {
             const data = await Cart.findOne({
                 where: {
                     id: id
-                }
+                },
+                include: [
+                    {
+                        model: Drug,
+                        attributes: [
+                            "image",
+                            "name",
+                            "price"
+                        ]
+                    }
+                ]
             });
 
             if (!data) {
