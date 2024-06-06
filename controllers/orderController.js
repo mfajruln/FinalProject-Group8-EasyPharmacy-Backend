@@ -1,5 +1,5 @@
 const { where, DATE, or } = require('sequelize');
-const { Cart, Drug, Order, OrderDetail } = require('../models');
+const { Cart, Drug, Order, OrderDetail, sequelize } = require('../models');
 const { Op } = require('sequelize');
 
 class OrderController {
@@ -434,7 +434,7 @@ class OrderController {
 
             console.log(error);
             res.status(error.status).json({
-                
+
                 message: error.errMessage
             })
         }
@@ -442,6 +442,8 @@ class OrderController {
     }
 
     static async paidOrder(req, res) {
+
+        const transc = await sequelize.transaction();
 
         try {
             
@@ -465,11 +467,58 @@ class OrderController {
             })
 
             if (!data) {
+                
                 throw {
+
                     status: 404,
-                    errMessage: "Not Found."
+                    errMessage: "Not Found"
                 }
             } else if (data) {
+
+                const dataQuantityOrder = await OrderDetail.findAll({
+
+                    where: {
+                        orderId: data.id
+                    }
+                })
+
+                for (let drug of dataQuantityOrder) {
+                    
+                    const dataStock = await Drug.findOne({
+
+                        where: {
+
+                            id: drug.drugId
+                        }
+                    })
+    
+                    if (drug.quantity > dataStock.stock) {
+                        
+                        throw {
+    
+                            status: 400,
+                            errMessage: "Out of Stock " + dataStock.name
+                        }
+                    } else {
+
+                        await dataStock.decrement('stock', {
+
+                            by: drug.quantity
+                        }, {
+                            transaction: transc
+                        })
+                    }
+                }
+
+                data.paidStatus = "Selesai";
+                await data.save();
+
+                await transc.commit();
+
+                res.status(200).json({
+                    message: "Order Berhasil di Bayar"
+                });
+
                 // data.paidStatus = "Batal"
                 // await data.save();
         
@@ -480,6 +529,7 @@ class OrderController {
 
             } else {
                 throw {
+
                     status: 500,
                     errMessage: "Internal Server Error"
                 }
@@ -487,8 +537,12 @@ class OrderController {
 
 
         } catch (error) {
+
             console.log(error);
+
+            await transc.rollback();
             res.status(error.status).json({
+
                 message: error.errMessage
             })
         }
@@ -504,14 +558,18 @@ class OrderController {
             if (!orderId || !userId
                 || orderId < 1 || userId < 1
                 || !Number.isInteger(orderId) || !Number.isInteger(userId)) {
+
                 throw {
+
                     status: 400,
                     errMessage: "Bad Request"
                 }
             }
     
             const data = await Order.findOne({
+
                 where: {
+
                     [Op.and]: [
                         { id: orderId }, { userId }, {paidStatus: "Belum Bayar"}
                     ]
@@ -519,26 +577,34 @@ class OrderController {
             })
 
             if (!data) {
+
                 throw {
+
                     status: 404,
                     errMessage: "Not Found."
                 }
             } else if (data) {
+
                 data.paidStatus = "Batal"
                 await data.save();
         
                 res.status(200).json({
+
                     message: "Order Berhasil di Batalkan"
                 })
             } else {
+
                 throw {
+
                     status: 500,
                     errMessage: "Internal Server Error"
                 }
             }
         } catch (error) {
+
             console.log(error);
             res.status(error.status).json({
+
                 message: error.errMessage
             })
         }

@@ -44,7 +44,7 @@ router.get('/order/paidlist/:id', OrderController.paidOrderList);
 router.get('/order/cancellist/:id', OrderController.cancelOrderList);
 // router.get('/order/list', OrderController.getAllOrders);
 router.post('/order/placedorder', OrderController.placedOrder);
-router.get('/order/detail', OrderController.detailOrder);
+router.post('/order/detail', OrderController.detailOrder);
 router.post('/order/paid', OrderController.paidOrder);
 router.put('/order/update', OrderController.updateQuantity);
 router.post('/order/cancel', OrderController.cancelOrder);
