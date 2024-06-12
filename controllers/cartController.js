@@ -44,7 +44,7 @@ class CartController {
             }
 
         } catch (error){
-            console.log(error);
+
             res.status(error.status).json({
                 message: error.errMessage
             })
@@ -54,7 +54,7 @@ class CartController {
     static async addToCart(req, res) {
 
         try {
-            const { userId, drugId, quantity, location } = req.body
+            const { userId, drugId, quantity } = req.body
 
             if (!userId || !drugId || !quantity
                 || userId < 1 || drugId < 1 || quantity < 1
@@ -103,9 +103,8 @@ class CartController {
             }
 
         } catch (error) {
-            console.log(error);
+
             res.status(error.status).json({
-                //untuk error yang terjadi karena email atau phone number already exist, gunakan response code 400 (bad request)
                 message: error.errMessage
             })
         }
@@ -153,10 +152,11 @@ class CartController {
     
             res.status(200).json(data)
         } catch(error) {
-            console.log(error);
+            
             res.status(error.status).json({
                 message: error.errMessage
             })
+
         }
         
     }
@@ -200,6 +200,7 @@ class CartController {
             }
 
         } catch (error) {
+
             res.status(error.status).json({
                 message: error.errMessage
             })

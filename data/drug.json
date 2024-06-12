@@ -1,0 +1,74 @@
+[
+    {
+      "image": "https://d2qjkwm11akmwu.cloudfront.net/products/782475_23-3-2020_14-28-1-1665778689.jpeg",
+      "name": "Paracetamol",
+      "description": "Obat penurun demam dan pereda nyeri",
+      "dose": "500mg",
+      "drugClass": "Bebas",
+      "drugFactory": "Generik",
+      "drugType": "Kaplet",
+      "price": 6365,
+      "stock": 50,
+      "packaging": "Strip"
+    },
+    {
+      "image": "https://d1vbn70lmn1nqe.cloudfront.net/prod/wp-content/uploads/2023/05/13090017/amoxilin.jpg",
+      "name": "Amoxicillin",
+      "description": "Antibiotik untuk mengobati infeksi bakteri, seperti infeksi saluran pernapasan, kulit, dan infeksi THT.",
+      "dose": "500mg",
+      "drugClass": "Keras",
+      "drugFactory": "Generik",
+      "drugType": "Kaplet",
+      "price": 12000,
+      "stock": 75,
+      "packaging": "Strip"
+    },
+    {
+      "image": "https://kalbemed.com/storage/images/products/ec5f39e7f0c80b20c0bf1e614e968acf.jpg",
+      "name": "Cetirizine",
+      "description": "Obat antihistamin untuk meredakan gejala alergi, seperti pilek, bersin, mata gatal, dan ruam kulit.",
+      "dose": "10mg",
+      "drugClass": "Keras",
+      "drugFactory": "Generik",
+      "drugType": "Kaplet",
+      "price": 4500,
+      "stock": 35,
+      "packaging": "Strip"
+    },
+    {
+      "image": "https://d3bbrrd0qs69m4.cloudfront.net/images/product/large/apotek_online_k24klik_20200905113048359225_TREMENZA.jpg",
+      "name": "Tremenza",
+      "description": "Obat Tremenza adalah obat yang digunakan untuk meringankan gelaja flu seperti hidung tersumbat dan bersin-bersin yang disebabkan oleh alergi pada saluran pernapasan atas.",
+      "dose": "60mg",
+      "drugClass": "Keras",
+      "drugFactory": "Generik",
+      "drugType": "Tablet",
+      "price": 14000,
+      "stock": 57,
+      "packaging": "Strip"
+    },
+    {
+      "image": "https://d3bbrrd0qs69m4.cloudfront.net/images/product/large/apotek_online_k24klik_20210802083708359225_IMG-20210730-180652--2---2-.jpg",
+      "name": "Methylprednisolon",
+      "description": "Obat Methylprednisolon merupakan glukokortikoid turunan prednisolon yang mempunyai efek kerja dan penggunaan yang sama seperti prednison.",
+      "dose": "4mg",
+      "drugClass": "Keras",
+      "drugFactory": "Generik",
+      "drugType": "Tablet",
+      "price": 62500,
+      "stock": 99,
+      "packaging": "Strip"
+    },
+    {
+      "image": "https://res.cloudinary.com/dk0z4ums3/image/upload/v1692150696/attached_image/rhinos-sr.jpg",
+      "name": "Rhinos SR",
+      "description": "Obat Rhinos SR merupakan obat yang digunakan untuk meringankan gejala rinitis alergi, bersin-bersin, hidung tersumbat, dan rasa gatal pada hidup.",
+      "dose": "60mg",
+      "drugClass": "Keras",
+      "drugFactory": "Generik",
+      "drugType": "Kapsul",
+      "price": 45000,
+      "stock": 71,
+      "packaging": "Strip"
+    }
+]

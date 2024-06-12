@@ -4,41 +4,6 @@ const { Op } = require('sequelize');
 
 class OrderController {
 
-    static async getAllOrders(req, res) {
-
-        const { userId } = req.body
-
-        try {
-            if (!userId || userId < 1 || !Number.isInteger(userId)) {
-                throw {
-                    status: 400,
-                    errMessage: "Bad Request."
-                }
-            }
-
-            const data = await Order.findAll({
-                where:{
-                    userId: userId
-                }
-            });
-
-            if (data.length > 0) {
-                res.status(200).json(data);
-            } else if (!data.length) {
-                throw {
-                    status: 404,
-                    errMessage: "Not Found."
-                }
-            }
-
-        } catch (error){
-            console.log(error);
-            res.status(error.status).json({
-                message: error.errMessage
-            })
-        }
-    }
-
     static async uppaidOrderList(req, res) {
 
         try {
@@ -75,7 +40,6 @@ class OrderController {
             
         } catch (error) {
 
-            console.log(error);
             res.status(error.status).json({
 
                 message: error.errMessage
@@ -120,7 +84,6 @@ class OrderController {
             }
         } catch (error) {
 
-            console.log(error);
             res.status(error.status).json({
 
                 message: error.errMessage
@@ -165,7 +128,6 @@ class OrderController {
             }
         } catch (error) {
 
-            console.log(error);
             res.status(error.status).json({
 
                 message: error.errMessage
@@ -184,7 +146,7 @@ class OrderController {
                 throw {
 
                     status: 400,
-                    errMessage: "Bad Request."
+                    errMessage: "Bad Request"
                 }
             }
 
@@ -230,7 +192,7 @@ class OrderController {
 
                 const orderDetailItems = await OrderDetail.bulkCreate(payload);
 
-                res.status(200).json({
+                res.status(201).json({
 
                     message: "Berhasil Menambahkan Item ke Order"
                 });
@@ -239,7 +201,7 @@ class OrderController {
                 throw {
 
                     status: 404,
-                    errMessage: "Not Found."
+                    errMessage: "Not Found"
                 }
             } else {
                 throw {
@@ -250,7 +212,6 @@ class OrderController {
 
         } catch(error) {
 
-            console.log(error);
             res.status(error.status).json({
 
                 message: error.errMessage
@@ -341,7 +302,6 @@ class OrderController {
             }
         } catch(error) {
 
-            console.log(error);
             res.status(error.status).json({
 
                 message: error.errMessage
@@ -433,7 +393,6 @@ class OrderController {
             
         } catch (error) {
 
-            console.log(error);
             res.status(error.status).json({
 
                 message: error.errMessage
@@ -539,8 +498,6 @@ class OrderController {
 
         } catch (error) {
 
-            console.log(error);
-
             await transc.rollback();
             res.status(error.status).json({
 
@@ -582,7 +539,7 @@ class OrderController {
                 throw {
 
                     status: 404,
-                    errMessage: "Not Found."
+                    errMessage: "Not Found"
                 }
             } else if (data) {
 
@@ -603,7 +560,6 @@ class OrderController {
             }
         } catch (error) {
 
-            console.log(error);
             res.status(error.status).json({
 
                 message: error.errMessage

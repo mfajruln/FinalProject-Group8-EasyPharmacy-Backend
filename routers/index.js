@@ -42,7 +42,6 @@ router.put('/cart/updatequantity', CartController.updateQuantity);
 router.get('/order/unpaidlist/:id', OrderController.uppaidOrderList);
 router.get('/order/paidlist/:id', OrderController.paidOrderList);
 router.get('/order/cancellist/:id', OrderController.cancelOrderList);
-// router.get('/order/list', OrderController.getAllOrders);
 router.post('/order/placedorder', OrderController.placedOrder);
 router.post('/order/detail', OrderController.detailOrder);
 router.post('/order/paid', OrderController.paidOrder);

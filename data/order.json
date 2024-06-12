@@ -1,0 +1,22 @@
+[
+    {
+        "userId": 1,
+        "paidStatus": "Belum Bayar"  
+    },
+    {
+        "userId": 1,
+        "paidStatus": "Belum Bayar"  
+    },
+    {
+        "userId": 1,
+        "paidStatus": "Belum Bayar"  
+    },
+    {
+        "userId": 1,
+        "paidStatus": "Selesai"
+    },
+    {
+        "userId": 1,
+        "paidStatus": "Batal"
+    }
+]

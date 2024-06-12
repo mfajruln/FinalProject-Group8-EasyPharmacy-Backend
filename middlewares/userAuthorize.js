@@ -1,12 +1,11 @@
-const { User } = require('../models')
+const { User } = require('../models');
 const { verifyToken } = require('../helpers/jwt');
 
 async function checkUserRole(req, res, next) {
     try {
-
         if (req.get("token")) {
             const token = req.get("token");
-            const dataDecrypt = verifyToken(token)
+            const dataDecrypt = verifyToken(token);
 
             const data = await User.findOne({
                 where: {
@@ -14,32 +13,25 @@ async function checkUserRole(req, res, next) {
                 }
             });
 
-            if (data.roleUser === "user") {
-                return next()
+            if (data && data.roleUser === "user") {
+                return next();
             } else {
                 throw {
-                    name: "403",
-                    errMessage: "User are not unauthorized"
-                }
+                    status: 403,
+                    errMessage: "User is not authorized"
+                };
             }
         } else {
             throw {
-                name: "500",
-                errMessage: "Server Error."
-            }
+                status: 500,
+                errMessage: "Internal Server Error"
+            };
         }
-    } catch(error) {
-        if (error.name === "403") {
-            res.status(403).json({
-                message: error.errMessage
-            })
-        } else {
-            res.status(500).json({
-                //untuk error yang terjadi karena email atau phone number already exist, gunakan response code 400 (bad request)
-                // message: error.errMessage
-            })
-        }
+    } catch (error) {
+        res.status(error.status || 500).json({
+            message: error.errMessage || "Internal Server Error"
+        });
     }
 }
 
-module.exports = checkUserRole
+module.exports = checkUserRole;
